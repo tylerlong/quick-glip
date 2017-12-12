@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <div className='container'>
         <div className='left' >{ tokenStore.hasToken ? 'left' : null }</div>
-        <div className='middle'>{ tokenStore.hasToken ? 'Right' : null }</div>
+        <div className='middle'>{ tokenStore.hasToken ? 'middle' : null }</div>
         <div className='right'>{ tokenStore.hasToken ? null : <Login /> }</div>
       </div>
     )

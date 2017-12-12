@@ -1,6 +1,5 @@
 import React from 'react'
 import { Input, Form, Card, Button, message } from 'antd'
-import { observer } from 'mobx-react'
 
 import rcClient from '../utils/rcClient'
 
@@ -51,4 +50,4 @@ class Login extends React.Component {
   }
 }
 
-export default observer(Login)
+export default Login
