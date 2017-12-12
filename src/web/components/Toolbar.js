@@ -1,11 +1,14 @@
 import React from 'react'
 import { Icon, Popconfirm } from 'antd'
 
+import rcClient from '../utils/rcClient'
+
 class Toolbar extends React.Component {
   render () {
     return (
       <div>
-        <Popconfirm title='Are you sure to logout?' onConfirm={e => { console.log('logout') }} okText='Yes' cancelText='No'>
+        <Popconfirm title='Are you sure to logout?' okText='Yes' cancelText='No'
+          onConfirm={e => { rcClient.logout() }}>
           <Icon type='logout' style={{
             margin: '8px auto',
             display: 'block',
