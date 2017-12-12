@@ -31,7 +31,6 @@ const PostStore = types.model({
   async load (groupId) {
     const res = await rcClient.get('/glip/posts', { groupId })
     const json = await res.json()
-    console.log(json)
     self.set(json.records)
   },
   set (posts) {
