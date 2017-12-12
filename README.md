@@ -16,6 +16,14 @@ yarn build:watch
 yarn start
 ```
 
+
+## Pack
+
+```
+yarn dist:dev
+```
+
+
 ## Distribution
 
 ```
