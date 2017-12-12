@@ -41,4 +41,5 @@ html, body {
   left: 320px;
   width: calc(100% - 320px);
   height: 100%;
+  overflow-y: scroll;
 }

@@ -10,10 +10,10 @@ class Toolbar extends React.Component {
         <Popconfirm title='Are you sure to logout?' okText='Yes' cancelText='No'
           onConfirm={e => { rcClient.logout() }}>
           <Icon type='logout' style={{
-            margin: '8px auto',
+            margin: '16px auto',
             display: 'block',
             color: 'white',
-            fontSize: '36px',
+            fontSize: '32px',
             cursor: 'pointer'
           }} title='Logout' />
         </Popconfirm>

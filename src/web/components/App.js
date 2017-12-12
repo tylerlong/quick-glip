@@ -5,14 +5,14 @@ import Login from './Login'
 import tokenStore from '../models/tokenStore'
 import MainPanel from './MainPanel'
 import Toolbar from './Toolbar'
-import GroupList from './GroupList'
+import Groups from './Groups'
 
 class App extends React.Component {
   render () {
     return (
       <div className='container'>
         <div className='left' >{ tokenStore.hasToken ? <Toolbar /> : null }</div>
-        <div className='middle'>{ tokenStore.hasToken ? <GroupList /> : null }</div>
+        <div className='middle'>{ tokenStore.hasToken ? <Groups /> : null }</div>
         <div className='right'>{ tokenStore.hasToken ? <MainPanel /> : <Login /> }</div>
       </div>
     )

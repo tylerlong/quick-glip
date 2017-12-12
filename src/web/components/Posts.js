@@ -2,20 +2,20 @@ import React from 'react'
 import { List } from 'antd'
 import { observer } from 'mobx-react'
 
-import groupStore from '../models/groupStore'
+import postStore from '../models/postStore'
 
-class GroupList extends React.Component {
+class Posts extends React.Component {
   componentDidMount () {
-    groupStore.load()
+    postStore.load(14760828930)
   }
 
   render () {
     return (
-      <List dataSource={groupStore.list} renderItem={item => (
+      <List dataSource={postStore.list} renderItem={item => (
         <List.Item><div style={{ padding: '0 8px' }}>{item}</div></List.Item>
       )} />
     )
   }
 }
 
-export default observer(GroupList)
+export default observer(Posts)
