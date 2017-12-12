@@ -43,8 +43,8 @@ describe('tokenStore', () => {
     expect(json).toEqual(tokenJson)
   })
 
-  test('No rcToken', async () => {
-    expect.assertions(1)
+  test('RC Token', async () => {
+    expect.assertions(2)
     await tokenStore.clear()
     const rc = new RingCentral({
       tokenStore,
@@ -53,17 +53,7 @@ describe('tokenStore', () => {
       appSecret: secret.appSecret
     })
     expect(rc.getToken()).rejects.toEqual(new Error('Token not exist.'))
-  })
 
-  test('Has rcToken', async () => {
-    expect.assertions(1)
-    await tokenStore.clear()
-    const rc = new RingCentral({
-      tokenStore,
-      server: secret.server,
-      appKey: secret.appKey,
-      appSecret: secret.appSecret
-    })
     await rc.auth({
       username: secret.username,
       extension: secret.extension,

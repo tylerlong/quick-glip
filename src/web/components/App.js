@@ -1,16 +1,16 @@
 import React from 'react'
 import { observer } from 'mobx-react'
-import * as R from 'ramda'
 
 import Login from './Login'
+import tokenStore from '../models/tokenStore'
 
 class App extends React.Component {
   render () {
     return (
       <div className='container'>
-        <div className='left' >{ R.isNil(global.token) ? null : 'left' }</div>
-        <div className='middle'>{ R.isNil(global.token) ? null : 'Right' }</div>
-        <div className='right'>{ R.isNil(global.token) ? <Login /> : null }</div>
+        <div className='left' >{ tokenStore.hasToken ? 'left' : null }</div>
+        <div className='middle'>{ tokenStore.hasToken ? 'Right' : null }</div>
+        <div className='right'>{ tokenStore.hasToken ? null : <Login /> }</div>
       </div>
     )
   }

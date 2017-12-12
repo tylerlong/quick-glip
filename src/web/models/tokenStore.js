@@ -1,5 +1,6 @@
 import { types } from 'mobx-state-tree'
 import RcToken from 'ringcentral-ts/Token'
+import * as R from 'ramda'
 
 export const Token = types.model({
   appKey: types.string,
@@ -17,6 +18,9 @@ export const Token = types.model({
 const TokenStore = types.model({
   token: types.union(Token, types.undefined)
 }).views(self => ({
+  get hasToken () {
+    return !R.isNil(self.token)
+  },
   get () { // return RcToken
     if (self.token) {
       return new RcToken().fromCache(self.token)
