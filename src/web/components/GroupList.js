@@ -11,7 +11,9 @@ class GroupList extends React.Component {
 
   render () {
     return (
-      <List dataSource={groupStore.list} renderItem={item => (<List.Item>{item}</List.Item>)} />
+      <List dataSource={groupStore.list} renderItem={item => (
+        <List.Item><div style={{ padding: '0 8px' }}>{item}</div></List.Item>
+      )} />
     )
   }
 }
