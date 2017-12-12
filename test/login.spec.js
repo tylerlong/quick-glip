@@ -1,9 +1,10 @@
 /* eslint-env jest */
 import RingCentral from 'ringcentral-ts'
+
 import secret from '../secret.json'
 
 const rc = new RingCentral({
-  server: secret.server, // You should use SERVER_PRODUCTION in production
+  server: secret.server,
   appKey: secret.appKey,
   appSecret: secret.appSecret
 })
