@@ -50,7 +50,8 @@
     "mobx-state-tree": "^1.2.1",
     "ramda": "^0.25.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "ringcentral-ts": "^0.9.1"
   },
   "build": {
     "appId": "quick-glip.ringcentral.com",
