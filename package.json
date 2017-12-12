@@ -1,0 +1,7 @@
+{
+  "name": "quick-glip",
+  "version": "0.1.0",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}
