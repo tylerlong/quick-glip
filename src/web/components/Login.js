@@ -20,30 +20,26 @@ const formItemLayout = {
 class Login extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      username: '',
-      extension: '',
-      password: ''
-    }
+    this.form = {}
   }
   render () {
     return (
       <Card title='Login'>
         <Form.Item {...formItemLayout} label='Username'>
-          <Input onChange={e => this.setState({username: e.target.value})} />
+          <Input onChange={e => { this.form.username = e.target.value }} />
         </Form.Item>
         <Form.Item {...formItemLayout} label='Extension'>
-          <Input onChange={e => this.setState({extension: e.target.value})} />
+          <Input onChange={e => { this.form.extension = e.target.value }} />
         </Form.Item>
         <Form.Item {...formItemLayout} label='Password'>
-          <Input onChange={e => this.setState({password: e.target.value})} type='password' />
+          <Input onChange={e => { this.form.password = e.target.value }} type='password' />
         </Form.Item>
         <Button type='primary' size='large' style={{ width: '100%', marginTop: 16 }} onClick={e => {
           console.log('clicked')
           rcClient.auth({
-            username: this.state.username,
-            extension: this.state.extension,
-            password: this.state.password
+            username: this.form.username,
+            extension: this.form.extension,
+            password: this.form.password
           }).then(() => {
             message.success('You\'ve logged in.')
           }).catch(error => {
