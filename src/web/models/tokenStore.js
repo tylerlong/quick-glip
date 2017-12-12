@@ -1,4 +1,4 @@
-import { types } from 'mobx-state-tree'
+import { types, onSnapshot } from 'mobx-state-tree'
 import RcToken from 'ringcentral-ts/Token'
 import * as R from 'ramda'
 
@@ -35,6 +35,10 @@ const TokenStore = types.model({
   }
 }))
 
-const tokenStore = TokenStore.create({})
+const tokenStore = TokenStore.create({ token: global.store.get('token') })
+
+onSnapshot(tokenStore, newSnapshot => {
+  global.store.set('token', newSnapshot.token)
+})
 
 export default tokenStore

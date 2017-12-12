@@ -34,7 +34,6 @@ class Login extends React.Component {
           <Input onChange={e => { this.form.password = e.target.value }} type='password' />
         </Form.Item>
         <Button type='primary' size='large' style={{ width: '100%', marginTop: 16 }} onClick={e => {
-          console.log('clicked')
           rcClient.auth({
             username: this.form.username,
             extension: this.form.extension,
