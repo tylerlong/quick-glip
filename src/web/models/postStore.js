@@ -51,9 +51,8 @@ const PostStore = types.model({
   setGroupId (groupId) {
     self.groupId = groupId
   },
-  async createPost (text) {
-    await rcClient.post('/glip/posts', { groupId: self.groupId, text })
-    await self.loadPosts()
+  createPost (text) {
+    rcClient.post('/glip/posts', { groupId: self.groupId, text })
   }
 }))
 

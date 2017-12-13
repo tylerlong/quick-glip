@@ -38,6 +38,20 @@ const GroupStore = types.model({
   },
   setLoading (loading) {
     self.loading = loading
+  },
+  afterCreate () {
+    const subscription = rcClient.createSubscription()
+    subscription.onMessage(message => {
+      const event = message.body
+      if (event.creatorId == null) {
+        return // todo: why are there post without creatorid ?
+      }
+      if (event.groupId === postStore.groupId) { // current group
+        postStore.loadPosts()
+      }
+      // other group
+    })
+    subscription.subscribe(['/glip/posts'])
   }
 }))
 
