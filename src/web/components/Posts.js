@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Spin, Input } from 'antd'
+import { Divider, Spin, Input, Avatar } from 'antd'
 import { observer } from 'mobx-react'
 import * as R from 'ramda'
 
@@ -35,8 +35,8 @@ class Posts extends React.Component {
             }} />
         </div>
         {postStore.list().map(item => (
-          <div key={item.id} style={{ paddingLeft: '16px' }}>
-            <img width='32px' src={item.creator.avatar} style={{ marginRight: '16px' }} />
+          <div key={item.id} >
+            <Avatar src={item.creator.avatar} style={{ margin: '0 16px' }} />
             {item.title}
             <Divider />
           </div>
