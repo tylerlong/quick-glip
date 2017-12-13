@@ -23,7 +23,8 @@ export const Post = types.model({
 
 const PostStore = types.model({
   posts: types.array(Post),
-  loading: false
+  groupId: '-1',
+  loading: true
 }).views(self => ({
   get list () {
     return self.posts.map(post => post.text || post.type)
@@ -34,6 +35,7 @@ const PostStore = types.model({
     const res = await rcClient.get('/glip/posts', { groupId })
     const json = await res.json()
     self.setPosts(json.records)
+    self.setGroupId(groupId)
     self.setLoading(false)
   },
   setPosts (posts) {
@@ -41,6 +43,9 @@ const PostStore = types.model({
   },
   setLoading (loading) {
     self.loading = loading
+  },
+  setGroupId (groupId) {
+    self.groupId = groupId
   }
 }))
 
