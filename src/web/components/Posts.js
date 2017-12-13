@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import * as R from 'ramda'
 
 import postStore from '../models/postStore'
+import personStore from '../models/personStore'
 
 class Posts extends React.Component {
   constructor (props) {
@@ -34,9 +35,9 @@ class Posts extends React.Component {
               }
             }} />
         </div>
-        {postStore.list().map(item => (
+        {postStore.posts.map(item => (
           <div key={item.id} >
-            <Avatar src={item.creator.avatar} style={{ margin: '0 16px' }} />
+            <Avatar src={personStore.person(item.creatorId).avatar} style={{ margin: '0 16px' }} />
             {item.title}
             <Divider />
           </div>

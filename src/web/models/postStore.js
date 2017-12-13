@@ -1,7 +1,6 @@
 import { types } from 'mobx-state-tree'
 
 import rcClient from '../utils/rcClient'
-import personStore from './personStore'
 
 export const Attachment = types.model({
   id: types.string,
@@ -20,20 +19,17 @@ export const Post = types.model({
   addedPersonIds: types.union(types.array(types.string), types.null),
   creationTime: types.string,
   lastModifiedTime: types.string
-})
+}).views(self => ({
+  get title () {
+    return self.text || self.type
+  }
+}))
 
 const PostStore = types.model({
   posts: types.array(Post),
   groupId: '-1',
   loading: true
 }).actions(self => ({
-  list () {
-    return self.posts.map(post => ({
-      id: post.id,
-      title: post.text || post.type,
-      creator: personStore.person(post.creatorId)
-    }))
-  },
   async loadPosts () {
     const res = await rcClient.get('/glip/posts', { groupId: self.groupId })
     const json = await res.json()
