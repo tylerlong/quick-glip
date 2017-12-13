@@ -41,7 +41,7 @@ yarn dist:dev
 ## Distribution
 
 ```
-yarn dist
+GH_TOKEN=<github-token> yarn dist
 ```
 
 
