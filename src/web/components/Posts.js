@@ -28,7 +28,7 @@ class Posts extends React.Component {
               if (R.isNil(this.state.draft) || R.isEmpty(this.state.draft.trim())) {
                 return
               }
-              console.log(`post message: ${this.state.draft}`)
+              postStore.createPost(this.state.draft)
               this.setState({ draft: '' })
             }
           }} />

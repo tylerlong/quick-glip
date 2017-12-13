@@ -30,12 +30,15 @@ const PostStore = types.model({
     return self.posts.map(post => post.text || post.type)
   }
 })).actions(self => ({
-  async load (groupId) {
-    self.setLoading(true)
-    const res = await rcClient.get('/glip/posts', { groupId })
+  async loadPosts () {
+    const res = await rcClient.get('/glip/posts', { groupId: self.groupId })
     const json = await res.json()
     self.setPosts(json.records)
+  },
+  async load (groupId) {
+    self.setLoading(true)
     self.setGroupId(groupId)
+    await self.loadPosts()
     self.setLoading(false)
   },
   setPosts (posts) {
@@ -46,6 +49,10 @@ const PostStore = types.model({
   },
   setGroupId (groupId) {
     self.groupId = groupId
+  },
+  async createPost (text) {
+    await rcClient.post('/glip/posts', { groupId: self.groupId, text })
+    await self.loadPosts()
   }
 }))
 
