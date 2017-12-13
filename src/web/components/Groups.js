@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, Spin } from 'antd'
+import { Spin, Divider } from 'antd'
 import { observer } from 'mobx-react'
 
 import groupStore from '../models/groupStore'
@@ -17,11 +17,14 @@ class Groups extends React.Component {
       </div>
     }
     return (
-      <List dataSource={groupStore.list} renderItem={item => (
-        <List.Item style={{ cursor: 'pointer' }} onClick={e => { postStore.load(item.id) }}>
-          <div style={{ padding: '0 8px' }}>{item.title}</div>
-        </List.Item>
-      )} />
+      <div>
+        { groupStore.groups.map(group => {
+          return <div key={group.id} style={{ cursor: 'pointer' }} onClick={e => { postStore.load(group.id) }}>
+            <Divider />
+            <div style={{ paddingLeft: '8px' }}>{group.title}</div>
+          </div>
+        }) }
+      </div>
     )
   }
 }

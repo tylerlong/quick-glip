@@ -12,19 +12,16 @@ export const Group = types.model({
   members: types.array(types.string),
   creationTime: types.string,
   lastModifiedTime: types.string
-})
+}).views(self => ({
+  get title () {
+    return self.name || self.id
+  }
+}))
 
 const GroupStore = types.model({
   groups: types.array(Group),
   loading: false
-}).views(self => ({
-  get list () {
-    return self.groups.map(group => ({
-      id: group.id,
-      title: group.name || group.id
-    }))
-  }
-})).actions(self => ({
+}).actions(self => ({
   async load () {
     self.setLoading(true)
     const res = await rcClient.get('/glip/groups')
