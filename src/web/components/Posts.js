@@ -20,18 +20,20 @@ class Posts extends React.Component {
     }
     return (
       <div>
-        <Input.TextArea autosize={{ minRows: 2, maxRows: 6 }} value={this.state.draft}
-          onChange={e => { this.setState({ draft: e.target.value }) }}
-          onKeyPress={e => {
-            if (e.key === 'Enter') {
-              e.preventDefault()
-              if (R.isNil(this.state.draft) || R.isEmpty(this.state.draft.trim())) {
-                return
+        <div style={{ padding: '8px' }}>
+          <Input.TextArea autosize={{ minRows: 2, maxRows: 6 }} value={this.state.draft}
+            onChange={e => { this.setState({ draft: e.target.value }) }}
+            onKeyPress={e => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                if (R.isNil(this.state.draft) || R.isEmpty(this.state.draft.trim())) {
+                  return
+                }
+                postStore.createPost(this.state.draft)
+                this.setState({ draft: '' })
               }
-              postStore.createPost(this.state.draft)
-              this.setState({ draft: '' })
-            }
-          }} />
+            }} />
+        </div>
         <List dataSource={postStore.list} renderItem={item => (
           <List.Item><div style={{ padding: '0 8px' }}>{item}</div></List.Item>
         )} />
