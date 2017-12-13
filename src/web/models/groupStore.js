@@ -1,6 +1,7 @@
 import { types } from 'mobx-state-tree'
 
 import rcClient from '../utils/rcClient'
+import postStore from './postStore'
 
 export const Group = types.model({
   id: types.string,
@@ -14,19 +15,26 @@ export const Group = types.model({
 })
 
 const GroupStore = types.model({
-  groups: types.array(Group)
+  groups: types.array(Group),
+  loading: false
 }).views(self => ({
   get list () {
     return self.groups.map(group => group.name || group.id)
   }
 })).actions(self => ({
   async load () {
+    self.setLoading(true)
     const res = await rcClient.get('/glip/groups')
     const json = await res.json()
-    self.set(json.records)
+    self.setGroups(json.records)
+    self.setLoading(false)
+    postStore.load(self.groups[0].id)
   },
-  set (groups) {
+  setGroups (groups) {
     self.groups = groups
+  },
+  setLoading (loading) {
+    self.loading = loading
   }
 }))
 

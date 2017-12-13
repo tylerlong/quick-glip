@@ -15,26 +15,32 @@ export const Post = types.model({
   type: types.enumeration(['TextMessage', 'PersonJoined', 'PersonsAdded']),
   text: types.union(types.string, types.null),
   attachments: types.union(types.array(Attachment), types.null),
-  creatorId: types.string,
+  creatorId: types.union(types.string, types.null),
   addedPersonIds: types.union(types.array(types.string), types.null),
   creationTime: types.string,
   lastModifiedTime: types.string
 })
 
 const PostStore = types.model({
-  posts: types.array(Post)
+  posts: types.array(Post),
+  loading: false
 }).views(self => ({
   get list () {
     return self.posts.map(post => post.text || post.type)
   }
 })).actions(self => ({
   async load (groupId) {
+    self.setLoading(true)
     const res = await rcClient.get('/glip/posts', { groupId })
     const json = await res.json()
-    self.set(json.records)
+    self.setPosts(json.records)
+    self.setLoading(false)
   },
-  set (posts) {
+  setPosts (posts) {
     self.posts = posts
+  },
+  setLoading (loading) {
+    self.loading = loading
   }
 }))
 
