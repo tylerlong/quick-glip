@@ -3,6 +3,9 @@
 A quick Glip implementation with React and mobx-state-tree.
 
 
+# [Download pre-built apps](https://github.com/tylerlong/quick-glip/releases)
+
+
 ## Setup
 
 ```
