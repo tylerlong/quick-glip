@@ -25,15 +25,18 @@ const PostStore = types.model({
   posts: types.array(Post),
   groupId: '-1',
   loading: true
-}).views(self => ({
-  get list () {
-    return self.posts.map(post => post.text || post.type)
-  }
-})).actions(self => ({
+}).actions(self => ({
+  list () {
+    return self.posts.map(post => ({
+      title: post.text || post.type,
+      creatorId: post.creatorId
+    }))
+  },
   async loadPosts () {
     const res = await rcClient.get('/glip/posts', { groupId: self.groupId })
     const json = await res.json()
-    self.setPosts(json.records)
+    const records = json.records.filter(item => item.creatorId !== null) // todo: why are there post without creatorId ?
+    self.setPosts(records)
   },
   async load (groupId) {
     self.setLoading(true)

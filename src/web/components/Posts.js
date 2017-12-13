@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import * as R from 'ramda'
 
 import postStore from '../models/postStore'
+import personStore from '../models/personStore'
 
 class Posts extends React.Component {
   constructor (props) {
@@ -34,9 +35,17 @@ class Posts extends React.Component {
               }
             }} />
         </div>
-        <List dataSource={postStore.list} renderItem={item => (
-          <List.Item><div style={{ padding: '0 8px' }}>{item}</div></List.Item>
-        )} />
+        <List dataSource={postStore.list()} renderItem={item => {
+          const creator = personStore.person(item.creatorId)
+          return (
+            <List.Item>
+              <div style={{ padding: '0 8px' }}>
+                <img width='32px' src={creator.avatar} style={{ marginRight: '8px' }} />
+                {item.title}
+              </div>
+            </List.Item>
+          )
+        }} />
       </div>
     )
   }
