@@ -64,7 +64,7 @@ const electronConfig = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['env', { 'targets': { 'node': '4.8.7' } }]
+              'env'
             ]
           }
         }
