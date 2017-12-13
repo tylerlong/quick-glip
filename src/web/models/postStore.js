@@ -5,8 +5,8 @@ import rcClient from '../utils/rcClient'
 export const Attachment = types.model({
   id: types.string,
   type: types.string,
-  contentUri: types.string,
-  name: types.string
+  contentUri: types.union(types.string, types.undefined),
+  name: types.union(types.string, types.undefined)
 })
 
 export const Post = types.model({

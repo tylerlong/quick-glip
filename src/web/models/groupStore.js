@@ -19,7 +19,10 @@ const GroupStore = types.model({
   loading: false
 }).views(self => ({
   get list () {
-    return self.groups.map(group => group.name || group.id)
+    return self.groups.map(group => ({
+      id: group.id,
+      title: group.name || group.id
+    }))
   }
 })).actions(self => ({
   async load () {
