@@ -1,22 +1,17 @@
 import React from 'react'
 import { Icon, Popconfirm } from 'antd'
+import { observer } from 'mobx-react'
 
 import rcClient from '../utils/rcClient'
 import personStore from '../models/personStore'
 
 class Toolbar extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {}
-    personStore.loadPerson('~').then(person => {
-      this.setState({ me: person })
-    })
-  }
   render () {
+    const me = personStore.person('~')
     return (
       <div>
-        { this.state.me === undefined ? null : (
-          <img width='40px' src={this.state.me.avatar} style={{ margin: '16px auto', display: 'block' }} />
+        { me.loaded === false ? null : (
+          <img width='40px' src={me.avatar} style={{ margin: '16px auto', display: 'block' }} />
         )}
         <Popconfirm title='Are you sure to logout?' okText='Yes' cancelText='No'
           onConfirm={e => { rcClient.logout() }}>
@@ -33,4 +28,4 @@ class Toolbar extends React.Component {
   }
 }
 
-export default Toolbar
+export default observer(Toolbar)
