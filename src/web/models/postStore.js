@@ -1,6 +1,7 @@
 import { types } from 'mobx-state-tree'
 
 import rcClient from '../utils/rcClient'
+import personStore from './personStore'
 
 export const Attachment = types.model({
   id: types.string,
@@ -28,8 +29,9 @@ const PostStore = types.model({
 }).actions(self => ({
   list () {
     return self.posts.map(post => ({
+      id: post.id,
       title: post.text || post.type,
-      creatorId: post.creatorId
+      creator: personStore.person(post.creatorId)
     }))
   },
   async loadPosts () {
