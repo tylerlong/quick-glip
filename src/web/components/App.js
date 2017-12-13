@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 
 import Login from './Login'
 import tokenStore from '../models/tokenStore'
-import MainPanel from './MainPanel'
+import Posts from './Posts'
 import Toolbar from './Toolbar'
 import Groups from './Groups'
 
@@ -13,7 +13,7 @@ class App extends React.Component {
       <div className='container'>
         <div className='left' >{ tokenStore.hasToken ? <Toolbar /> : null }</div>
         <div className='middle'>{ tokenStore.hasToken ? <Groups /> : null }</div>
-        <div className='right'>{ tokenStore.hasToken ? <MainPanel /> : <Login /> }</div>
+        <div className='right'>{ tokenStore.hasToken ? <Posts /> : <Login /> }</div>
       </div>
     )
   }
