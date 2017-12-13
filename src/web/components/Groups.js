@@ -19,7 +19,11 @@ class Groups extends React.Component {
     return (
       <div>
         { groupStore.groups.map(group => {
-          return <div key={group.id} style={{ cursor: 'pointer' }} onClick={e => { postStore.load(group.id) }}>
+          return <div key={group.id} style={{ cursor: 'pointer' }} onClick={e => {
+            if (group.id !== postStore.groupId) {
+              postStore.load(group.id)
+            }
+          }}>
             <Divider />
             <div style={{ paddingLeft: '8px' }}>{group.title}</div>
           </div>
