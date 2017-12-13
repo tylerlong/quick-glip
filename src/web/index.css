@@ -45,3 +45,8 @@ html, body {
   word-wrap: break-word;
   word-break: break-all;
 }
+
+.postItem {
+  white-space: pre;
+  padding-left: 16px;
+}

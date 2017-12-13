@@ -36,8 +36,8 @@ class Posts extends React.Component {
             }} />
         </div>
         {postStore.posts.map(item => (
-          <div key={item.id} >
-            <Avatar src={personStore.person(item.creatorId).avatar} style={{ margin: '0 16px' }} />
+          <div key={item.id} className='postItem'>
+            <Avatar src={personStore.person(item.creatorId).avatar} style={{ marginRight: '16px' }} />
             {item.title}
             <Divider />
           </div>
